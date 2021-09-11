@@ -37,3 +37,6 @@ build
 
 # json-server db
 db.json
+
+# jest snapshots
+__snapshots__
