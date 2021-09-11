@@ -25,11 +25,13 @@ function CoursesPage({ courses = [], authors = [], actions, ...props }) {
     }
   }, []);
 
-  const handleDeleteCourse = (course) => {
+  const handleDeleteCourse = async (course) => {
     toast.success("Course deleted");
-    actions.deleteCourse(course).catch((error) => {
+    try {
+      await actions.deleteCourse(course);
+    } catch (error) {
       toast.error("Delete failed. " + error.message, { autoClose: false });
-    });
+    }
   };
 
   return (
