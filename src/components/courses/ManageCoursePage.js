@@ -48,10 +48,15 @@ function ManageCoursePage({
   function handleSave(event) {
     event.preventDefault();
     setSaving(true);
-    saveCourse(course).then(() => {
-      toast.success("Course saved.");
-      history.push("/courses");
-    });
+    saveCourse(course)
+      .then(() => {
+        toast.success("Course saved.");
+        history.push("/courses");
+      })
+      .catch((error) => {
+        setSaving(false);
+        setErrors({ onSave: error.message });
+      });
   }
 
   return (
@@ -62,7 +67,7 @@ function ManageCoursePage({
       ) : (
         <CourseForm
           course={course}
-          error={errors}
+          errors={errors}
           authors={authors}
           onChange={handleChange}
           onSave={handleSave}
